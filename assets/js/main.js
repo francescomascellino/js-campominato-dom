@@ -45,6 +45,9 @@ function generateMineField(domElement, limit) {
 
         const cellElement = document.createElement('div');
         cellElement.classList.add('cell');
+
+        //calcolo dinamico della larghezza della cella in base al numero di caselle
+        cellElement.style.width = `calc(100% / ${Math.sqrt(limit)})`;
         domElement.append(cellElement);
         const cellValue = i + 1;
 
