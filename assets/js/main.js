@@ -74,7 +74,7 @@ function generateMineField(domElement, limit) {
 
                     gameOver(limit);
 
-                    //Altrimenti il colore viene cambiato in verde
+                    //Altrimenti se la cella non contiele la classe "bgGreen", questa viene applicata (rendendola verde e non più cliccabile)
                 } else if (!cellElement.classList.contains("bgGreen")) {
 
                     //this fa rifermento al "soggetto" dell'eventListener
@@ -82,7 +82,6 @@ function generateMineField(domElement, limit) {
                     this.classList.add("bgGreen");
                     console.log("Cella cliccata =", cellValue);
 
-                    cellElement.innerHTML = "";
                     // cellElement.append(cellValue);
                     cellElement.append("🚩");
                     scoreCounter.innerHTML = scoreValue += 1;
