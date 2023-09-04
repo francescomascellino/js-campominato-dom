@@ -23,6 +23,7 @@ const fieldElement = document.querySelector(".field");
 const gameOverElement = document.getElementById("gameOver");
 const scoreCounter = document.getElementById("scoreCounter");
 let scoreValue = 0;
+const minesToGenerate = 16;
 const limit = 100;
 
 /**
@@ -35,7 +36,7 @@ function generateMineField(domElement, limit) {
     console.log("generating cells");
 
     //Aggiunge le mine nelle caselle il cui valore è contenuto nell'array delle mine
-    const minesArray = generateMines(1, Number(limit));
+    const minesArray = generateMines(minesToGenerate, Number(limit));
 
     //resets the score value
     scoreValue = 0;
@@ -50,6 +51,9 @@ function generateMineField(domElement, limit) {
         if (minesArray.includes(cellValue)) {
 
             cellElement.classList.add("mine");
+
+            //EVIDENZIATORE MINE TEMPORANEO DI DEBUG
+            cellElement.classList.add("bgRed");
 
         }
 
@@ -84,6 +88,7 @@ function generateMineField(domElement, limit) {
                     scoreCounter.innerHTML = scoreValue += 1;
                     console.log("punteggio =", scoreValue);
 
+                    //se sono state cliccate tutte le celle libere (limit - numero di mine il gioco finisce)
                     if (scoreValue == (limit - minesArray.length)) {
                         gameOver(limit);
                     }
