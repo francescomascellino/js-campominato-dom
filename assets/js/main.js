@@ -22,6 +22,7 @@ const generateFieldForm = document.getElementById("generateFieldForm");
 const resetBtn = document.getElementById("resetBtn");
 const fieldElement = document.querySelector(".field");
 const gameOverElement = document.getElementById("gameOver");
+const gameOverMessage = document.getElementById("gameOverMessage");
 const scoreCounter = document.getElementById("scoreCounter");
 let scoreValue = 0;
 const minesToGenerate = 16;
@@ -94,7 +95,7 @@ function generateMineField(domElement, limit) {
 
                     //se sono state cliccate tutte le celle libere (limit - numero di mine il gioco finisce)
                     if (scoreValue == (limit - minesArray.length)) {
-                        gameOver(limit);
+                        victory(limit);
                     }
 
                 }
@@ -181,6 +182,27 @@ function gameOver(limit) {
 
     //removes the d-none class from the game over message
     gameOverElement.classList.remove("d-none");
+    gameOverMessage.classList.remove("text-light", "border-success", "text-bg-success");
+    gameOverMessage.classList.add("text-danger", "border-danger", "text-bg-dark");
+    gameOverMessage.innerHTML = "Game Over";
+
+}
+
+function victory(limit) {
+    for (let i = 0; i < limit; i++) {
+
+        // Crea un array con tutti i div classe "cell"
+        const cellsArray = document.querySelectorAll(".cell");
+        //aggiunge la classe "gameover" all'elemento all'indfice i dell'array di celle fino a termine del ciclo
+        cellsArray[i].classList.add("gameOver");
+
+    }
+
+    //removes the d-none class from the game over message
+    gameOverElement.classList.remove("d-none");
+    gameOverMessage.classList.remove("text-danger", "border-danger", "text-bg-dark");
+    gameOverMessage.classList.add("text-light", "border-success", "text-bg-success");
+    gameOverMessage.innerHTML = "You Win";
 
 }
 
@@ -252,3 +274,5 @@ resetBtn.addEventListener("click", function (e) {
 
 });
 
+// gameOverMessage.classList.add("text-light", "border-success", "text-bg-success");
+// gameOverMessage.innerHTML = "You Win";
