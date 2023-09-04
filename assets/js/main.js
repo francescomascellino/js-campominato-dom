@@ -35,7 +35,7 @@ function generateMineField(domElement, limit) {
     console.log("generating cells");
 
     //Aggiunge le mine nelle caselle il cui valore è contenuto nell'array delle mine
-    const minesArray = generateMines(16, Number(limit));
+    const minesArray = generateMines(1, Number(limit));
 
     //resets the score value
     scoreValue = 0;
@@ -56,6 +56,9 @@ function generateMineField(domElement, limit) {
         //l'addEventListener viene associato a ogni cella ogni volta che viene creata durante il ciclo e rimane in attesa.
         cellElement.addEventListener("click", function () {
 
+            // while (scoreValue < limit) {
+
+
             //se le celle non contengono la classe "gameOver"
             if (!cellElement.classList.contains("gameOver")) {
 
@@ -68,10 +71,10 @@ function generateMineField(domElement, limit) {
                     cellElement.innerHTML = "";
                     cellElement.append("💣");
 
-                    gameOver(limit)
+                    gameOver(limit);
 
                     //Altrimenti il colore viene cambiato in verde
-                } else {
+                } else if (!cellElement.classList.contains("bgGreen")) {
 
                     //this fa rifermento al "soggetto" dell'eventListener
                     //Non è più possibile rimuovere la selezione e la cella mostra il suo valore
@@ -87,6 +90,8 @@ function generateMineField(domElement, limit) {
                 }
 
             }
+
+            // }
 
         })
 
