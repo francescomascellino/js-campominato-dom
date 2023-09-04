@@ -37,6 +37,9 @@ function generateMineField(domElement, limit) {
     //Aggiunge le mine nelle caselle il cui valore è contenuto nell'array delle mine
     const minesArray = generateMines(16, Number(limit));
 
+    //resets the score value
+    scoreValue = 0;
+
     for (let i = 0; i < limit; i++) {
 
         const cellElement = document.createElement('div');
@@ -174,6 +177,9 @@ generateBtn.addEventListener("click", function () {
     //adds or remove the "active" class from the button at each click
     generateBtn.classList.toggle("active");
 
+    //resets the innerHtml of the score counter
+    scoreCounter.innerHTML = 0;
+
     //if the button has the "active" class
     if (generateBtn.classList.contains("active")) {
 
@@ -198,6 +204,9 @@ generateBtn.addEventListener("click", function () {
 
 /* Reset Button */
 resetBtn.addEventListener("click", function () {
+
+    //resets the innerHtml of the score counter
+    scoreCounter.innerHTML = 0;
 
     //if the button has the "active" class (then there is a grid on screen)
     if (generateBtn.classList.contains("active")) {
