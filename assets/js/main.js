@@ -25,9 +25,51 @@ const gameOverElement = document.getElementById("gameOver");
 const gameOverMessage = document.getElementById("gameOverMessage");
 const scoreCounter = document.getElementById("scoreCounter");
 let scoreValue = 0;
-const minesToGenerate = 16;
+const minesToGenerate = 16; //inserito in una variabile per eventuali modifiche
 const fieldSize = document.getElementById("fieldSize");
 let limit = fieldSize.value;
+
+/**
+ * ## Generates a cartain value of random numbers wich will be assigned to an array
+ * @param {number} minesNumber how many random numbers have to be generated
+ * @param {number} limit the maximum value the generated random number, corresponding to the number of cells on the field.
+ * @returns an array of "minesNumber" values between 1 and "limit"
+ */
+function generateMines(minesNumber, limit) {
+    const minesList = [];
+
+    /*  With For Loop
+
+    for (let i = 0; minesList.length < minesNumber; i++) {
+    
+            let mine = Math.floor(Math.random() * limit) + 1;
+    
+            if (!minesList.includes(mine)) {
+                minesList.push(mine);
+            }
+    
+        }
+    
+    */
+    //Finche l'array lista di mine è inferiore del numero di mine
+    while (minesList.length < minesNumber) {
+
+        //genera un numero casuale tra 1 e il numero massimo d celle
+        let mine = Math.floor(Math.random() * limit) + 1;
+
+        //se questo valore non è incluso nell'array minesList, viene pushato dentro
+        if (!minesList.includes(mine)) {
+
+            minesList.push(mine);
+
+        }
+
+    }
+
+    console.log("Mines =", minesList);
+    return minesList;
+
+}
 
 /**
  * ### Generate Mine Field Cells
@@ -38,7 +80,7 @@ function generateMineField(domElement, limit) {
 
     console.log("generating cells");
 
-    //Aggiunge le mine nelle caselle il cui valore è contenuto nell'array delle mine
+    //Genera l'array delle mine
     const minesArray = generateMines(minesToGenerate, Number(limit));
 
     //resets the score value
@@ -46,16 +88,23 @@ function generateMineField(domElement, limit) {
 
     for (let i = 0; i < limit; i++) {
 
+        //crea una cella
         const cellElement = document.createElement('div');
         cellElement.classList.add('cell');
 
-        //calcolo dinamico della larghezza della cella in base al numero di caselle
+        //assegna dinamicamente la larghezza della cella in base al numero di caselle
         cellElement.style.width = `calc(100% / ${Math.sqrt(limit)})`;
+
+        //inserisce nel markup la cella creata
         domElement.append(cellElement);
+
+        //aggiorna il contatore del valore delle celle
         const cellValue = i + 1;
 
+        //se l'array delle mine include il valore della cella controllata dal ciclo
         if (minesArray.includes(cellValue)) {
 
+            //aggiunge la classe "mine" alla cella
             cellElement.classList.add("mine");
 
             //EVIDENZIATORE MINE TEMPORANEO DI DEBUG
@@ -63,19 +112,18 @@ function generateMineField(domElement, limit) {
 
         }
 
-        //l'addEventListener viene associato a ogni cella ogni volta che viene creata durante il ciclo e rimane in attesa.
+        //associa alla cella creata un addEventListener che resterà in attesa
         cellElement.addEventListener("click", function () {
 
             //se le celle non contengono la classe "gameOver"
             if (!cellElement.classList.contains("gameOver")) {
 
-                //Se la cella contiene la classe "mine" al click il colore viene cambiato in rosso
+                //Se la cella contiene la classe "mine" al click il colore viene cambiato in rosso e viene mostrata la bomba
                 if (cellElement.classList.contains("mine")) {
 
                     cellElement.classList.add("bgRed");
                     console.log("Cella cliccata =", cellValue);
 
-                    cellElement.innerHTML = "";
                     cellElement.append("💣");
 
                     gameOver(limit);
@@ -90,12 +138,16 @@ function generateMineField(domElement, limit) {
 
                     // cellElement.append(cellValue);
                     cellElement.append("🚩");
+
+                    //il contapunti viene aggiornato
                     scoreCounter.innerHTML = scoreValue += 1;
                     console.log("punteggio =", scoreValue);
 
-                    //se sono state cliccate tutte le celle libere (limit - numero di mine il gioco finisce)
+                    //se sono state cliccate tutte le celle libere (limit - il numero di mine) il gioco finisce)
                     if (scoreValue == (limit - minesArray.length)) {
+
                         victory(limit);
+
                     }
 
                 }
@@ -106,41 +158,6 @@ function generateMineField(domElement, limit) {
 
     }
 };
-
-/**
- * ## Generates a cartain value of random numbers wich will be assigned to an array
- * @param {number} minesNumber how many random numbers have to be generated
- * @param {number} limit the maximum value the generated random number, corresponding to the number of cells on the field.
- * @returns an array of "minesNumber" values between 1 and "limit"
- */
-function generateMines(minesNumber, limit) {
-    const minesList = [];
-
-    /* For Loop
-    for (let i = 0; minesList.length < minesNumber; i++) {
-    
-            let mine = Math.floor(Math.random() * limit) + 1;
-    
-            if (!minesList.includes(mine)) {
-                minesList.push(mine);
-            }
-    
-        }
-    */
-
-    while (minesList.length < minesNumber) {
-
-        let mine = Math.floor(Math.random() * limit) + 1;
-
-        if (!minesList.includes(mine)) {
-            minesList.push(mine);
-        }
-
-    }
-
-    console.log("Mines =", minesList);
-    return minesList;
-}
 
 /**
  * ### Remove Mine Field Cells
@@ -186,11 +203,11 @@ function gameOver(limit) {
     gameOverMessage.classList.add("text-danger", "border-danger", "text-bg-dark");
     gameOverMessage.innerHTML = "Game Over";
 
-}
+};
 
 /**
  * ### Adds the gameOver class to each cell on the field and displays "You Win" Message
- * @param {number} limitthe number ot times in wich the code will loop to add the "gameOver" class. it has the same value as the number of the cells in the field. 
+ * @param {number} limit the number ot times in wich the code will loop to add the "gameOver" class. it has the same value as the number of the cells in the field. 
  */
 function victory(limit) {
     for (let i = 0; i < limit; i++) {
@@ -277,6 +294,3 @@ resetBtn.addEventListener("click", function (e) {
     }
 
 });
-
-// gameOverMessage.classList.add("text-light", "border-success", "text-bg-success");
-// gameOverMessage.innerHTML = "You Win";
