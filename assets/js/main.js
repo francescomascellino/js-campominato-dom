@@ -56,9 +56,6 @@ function generateMineField(domElement, limit) {
         //l'addEventListener viene associato a ogni cella ogni volta che viene creata durante il ciclo e rimane in attesa.
         cellElement.addEventListener("click", function () {
 
-            // while (scoreValue < limit) {
-
-
             //se le celle non contengono la classe "gameOver"
             if (!cellElement.classList.contains("gameOver")) {
 
@@ -87,11 +84,13 @@ function generateMineField(domElement, limit) {
                     scoreCounter.innerHTML = scoreValue += 1;
                     console.log("punteggio =", scoreValue);
 
+                    if (scoreValue == (limit - minesArray.length)) {
+                        gameOver(limit);
+                    }
+
                 }
 
             }
-
-            // }
 
         })
 
