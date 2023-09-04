@@ -11,7 +11,6 @@ button {
     display: flex;
     flex-wrap: wrap;
     width: 80%;
-    /* margin: 0 auto; */
 }
 
 .cell {
@@ -26,4 +25,8 @@ button {
 
 .bgGreen {
     background-color: #53a8b6;
+}
+
+.bgRed {
+    background-color: #f95959;
 }
