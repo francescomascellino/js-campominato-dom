@@ -167,7 +167,7 @@ function removeMineField(limit) {
 };
 
 /**
- * ### Adds the gameOver class to each cell on the field
+ * ### Adds the gameOver class to each cell on the field and displays "Game Over" Message
  * @param {number} limit the number ot times in wich the code will loop to add the "gameOver" class. it has the same value as the number of the cells in the field.
  */
 function gameOver(limit) {
@@ -188,6 +188,10 @@ function gameOver(limit) {
 
 }
 
+/**
+ * ### Adds the gameOver class to each cell on the field and displays "You Win" Message
+ * @param {number} limitthe number ot times in wich the code will loop to add the "gameOver" class. it has the same value as the number of the cells in the field. 
+ */
 function victory(limit) {
     for (let i = 0; i < limit; i++) {
 
