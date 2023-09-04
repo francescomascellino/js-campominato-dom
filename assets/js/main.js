@@ -204,6 +204,9 @@ generateFieldForm.addEventListener("submit", function (e) {
         //changes the button inner text
         generateBtn.innerHTML = "Delete the Field";
 
+        //disables the field size select if there is a field on screen
+        fieldSize.setAttribute("disabled", "");
+
         //generates the cells inside the .field
         generateMineField(fieldElement, limit);
 
@@ -213,8 +216,9 @@ generateFieldForm.addEventListener("submit", function (e) {
         //changes the button inner text
         generateBtn.innerHTML = "Generate the Field";
 
-        // let actualFieldSize = fieldSize.value;
-        // console.log("actual field size =", actualFieldSize);
+        //remove the disabled attribute in the field size select if there is not a field on screen
+        fieldSize.removeAttribute("disabled", "");
+
         //removes the cells from the .field
         removeMineField(limit);
 
@@ -237,9 +241,6 @@ resetBtn.addEventListener("click", function (e) {
     if (generateFieldForm.classList.contains("active")) {
 
         console.log("resetting the field");
-
-        // limit = fieldSize.value;
-        // console.log("Number of cells =", fieldSize.value);
 
         //removes the grid
         removeMineField(limit);
