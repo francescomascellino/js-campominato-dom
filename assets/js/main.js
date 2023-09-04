@@ -21,6 +21,8 @@ const generateBtn = document.getElementById("generateBtn");
 const resetBtn = document.getElementById("resetBtn");
 const fieldElement = document.querySelector(".field");
 const gameOverElement = document.getElementById("gameOver");
+const scoreCounter = document.getElementById("scoreCounter");
+let scoreValue = 0;
 const limit = 100;
 
 /**
@@ -58,7 +60,7 @@ function generateMineField(domElement, limit) {
                 if (cellElement.classList.contains("mine")) {
 
                     cellElement.classList.add("bgRed");
-                    console.log(cellValue);
+                    console.log("Cella cliccata =", cellValue);
 
                     cellElement.innerHTML = "";
                     cellElement.append("💣");
@@ -71,11 +73,13 @@ function generateMineField(domElement, limit) {
                     //this fa rifermento al "soggetto" dell'eventListener
                     //Non è più possibile rimuovere la selezione e la cella mostra il suo valore
                     this.classList.add("bgGreen");
-                    console.log(cellValue);
+                    console.log("Cella cliccata =", cellValue);
 
                     cellElement.innerHTML = "";
                     // cellElement.append(cellValue);
                     cellElement.append("🚩");
+                    scoreCounter.innerHTML = scoreValue += 1;
+                    console.log("punteggio =", scoreValue);
 
                 }
 
