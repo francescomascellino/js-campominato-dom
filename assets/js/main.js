@@ -19,12 +19,21 @@ function generateMineField(domElement, limit) {
 
     console.log("generating cells");
 
+    //Aggiunge le mine nelle caselle il cui valore è contenuto nell'array delle mine
+    const minesArray = generateMines(16, Number(limit));
+
     for (let i = 0; i < limit; i++) {
 
         const cellElement = document.createElement('div');
         cellElement.classList.add('cell');
         domElement.append(cellElement);
         const cellValue = i + 1;
+
+        if (minesArray.includes(cellValue)) {
+
+            cellElement.classList.add("mine");
+
+        }
 
         //l'addEventListener viene associato a ogni cella ogni volta che viene creata durante il ciclo e rimane in attesa.
         cellElement.addEventListener("click", function () {
