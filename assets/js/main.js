@@ -108,7 +108,7 @@ function generateMineField(domElement, limit) {
             cellElement.classList.add("mine");
 
             //EVIDENZIATORE MINE TEMPORANEO DI DEBUG
-            cellElement.classList.add("bgRed");
+            // cellElement.classList.add("bgRed");
 
         }
 
@@ -128,7 +128,7 @@ function generateMineField(domElement, limit) {
 
                     gameOver(limit);
 
-                    //Altrimenti se la cella non contiele la classe "bgGreen", questa viene applicata (rendendola verde e non più cliccabile)
+                    //Else if the cell does non contain the "bgGreen" class, it will be applied (makind it no more clickable)
                 } else if (!cellElement.classList.contains("bgGreen")) {
 
                     //this fa rifermento al "soggetto" dell'eventListener
@@ -139,11 +139,11 @@ function generateMineField(domElement, limit) {
                     // cellElement.append(cellValue);
                     cellElement.append("🚩");
 
-                    //il contapunti viene aggiornato
+                    //the score counter is updated
                     scoreCounter.innerHTML = scoreValue += 1;
                     console.log("punteggio =", scoreValue);
 
-                    //se sono state cliccate tutte le celle libere (limit - il numero di mine) il gioco finisce)
+                    // if all the free cells (limit minus the numberof mines), player wins and ther game ends
                     if (scoreValue == (limit - minesArray.length)) {
 
                         victory(limit);
@@ -190,16 +190,18 @@ function removeMineField(limit) {
 function gameOver(limit) {
     for (let i = 0; i < limit; i++) {
 
-        // Crea un array con tutti i div classe "cell"
+        // Creates an array with all the div with a "cell" class
         const cellsArray = document.querySelectorAll(".cell");
 
-        //aggiunge la classe "gameover" all'elemento all'indice i dell'array di celle fino a termine del ciclo. Gli elementi con la classe "gameOver" non sono cliccabili (vedi funzione generateMineField).
+        //adds the "gameOver" class on each element at the i index of the cells array until the loop end. The elements with a "gameOver" class, like the ones with a "bgGreen" class are not clickable (see generateMinesField function)
         cellsArray[i].classList.add("gameOver");
 
     }
 
     //removes the d-none class from the game over message
     gameOverElement.classList.remove("d-none");
+
+    //removes the winning style classes from the gameover message and adds the Game Over style classes
     gameOverMessage.classList.remove("text-light", "border-success", "text-bg-success");
     gameOverMessage.classList.add("text-danger", "border-danger", "text-bg-dark");
     gameOverMessage.innerHTML = "Game Over";
@@ -213,16 +215,18 @@ function gameOver(limit) {
 function victory(limit) {
     for (let i = 0; i < limit; i++) {
 
-        // Crea un array con tutti i div classe "cell"
+        /// Creates an array with all the div with a "cell" class
         const cellsArray = document.querySelectorAll(".cell");
 
-        //aggiunge la classe "gameover" all'elemento all'indice i dell'array di celle fino a termine del ciclo. Gli elementi con la classe "gameOver" non sono cliccabili (vedi funzione generateMineField).
+        //adds the "gameOver" class on each element at the i index of the cells array until the loop end. The elements with a "gameOver" class, like the ones with a "bgGreen" class are not clickable (see generateMinesField function)
         cellsArray[i].classList.add("gameOver");
 
     }
 
     //removes the d-none class from the game over message
     gameOverElement.classList.remove("d-none");
+
+    //removes the Game Over style classes from the gameover message and adds the winning style classes
     gameOverMessage.classList.remove("text-danger", "border-danger", "text-bg-dark");
     gameOverMessage.classList.add("text-light", "border-success", "text-bg-success");
     gameOverMessage.innerHTML = "You Win";
