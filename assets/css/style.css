@@ -15,7 +15,6 @@ button {
 
 .cell {
     border: 1px solid #dbd8e3;
-    width: calc(100% / 10);
     aspect-ratio: 1/1;
     display: flex;
     align-items: center;

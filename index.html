@@ -26,14 +26,36 @@
 
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-center my-1">
+                    <form id="generateFieldForm">
 
-                        <button id="generateBtn" class="btn btn-success">Generate
-                            The Field</button>
+                        <div class="d-flex justify-content-center">
 
-                        <button id="resetBtn" class="btn btn-danger">Reset Field</button>
+                            <label for="fieldSize" class="fw-bold me-2">Choose
+                                the
+                                field
+                                size:</label>
+                            <select class="border border-1 rounded-3"
+                                id="fieldSize">
+                                <option value="100">Easy (10x10)</option>
+                                <option value="81">Medium (9x9)</option>
+                                <option value="49">Hard (7x7)</option>
+                            </select>
 
-                    </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center my-3">
+
+                            <button type="submit" id="generateBtn"
+                                class="btn btn-success">Generate
+                                The Field</button>
+
+                            <button type="reset" id="resetBtn"
+                                class="btn btn-danger">Reset
+                                Field</button>
+
+                        </div>
+
+                    </form>
 
                     <h1
                         class="border border-1 border-dark-subtle rounded-3 p-2 text-center text-success bg-body-secondary mt-4">Pts:

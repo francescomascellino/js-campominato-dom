@@ -18,13 +18,15 @@ difficoltà 3 ⇒ 49 caselle, con un numero compreso tra 1 e 49, divise in 7 cas
 */
 
 const generateBtn = document.getElementById("generateBtn");
+const generateFieldForm = document.getElementById("generateFieldForm");
 const resetBtn = document.getElementById("resetBtn");
 const fieldElement = document.querySelector(".field");
 const gameOverElement = document.getElementById("gameOver");
 const scoreCounter = document.getElementById("scoreCounter");
 let scoreValue = 0;
 const minesToGenerate = 16;
-const limit = 100;
+const fieldSize = document.getElementById("fieldSize");
+let limit = fieldSize.value;
 
 /**
  * ### Generate Mine Field Cells
@@ -183,16 +185,21 @@ function gameOver(limit) {
 }
 
 /* Generate Field Button */
-generateBtn.addEventListener("click", function () {
+generateFieldForm.addEventListener("submit", function (e) {
+
+    e.preventDefault();
 
     //adds or remove the "active" class from the button at each click
-    generateBtn.classList.toggle("active");
+    generateFieldForm.classList.toggle("active");
 
     //resets the innerHtml of the score counter
     scoreCounter.innerHTML = 0;
 
+    limit = fieldSize.value;
+    console.log("Number of cells =", fieldSize.value);
+
     //if the button has the "active" class
-    if (generateBtn.classList.contains("active")) {
+    if (generateFieldForm.classList.contains("active")) {
 
         //changes the button inner text
         generateBtn.innerHTML = "Delete the Field";
@@ -206,6 +213,8 @@ generateBtn.addEventListener("click", function () {
         //changes the button inner text
         generateBtn.innerHTML = "Generate the Field";
 
+        // let actualFieldSize = fieldSize.value;
+        // console.log("actual field size =", actualFieldSize);
         //removes the cells from the .field
         removeMineField(limit);
 
@@ -214,15 +223,23 @@ generateBtn.addEventListener("click", function () {
 });
 
 /* Reset Button */
-resetBtn.addEventListener("click", function () {
+resetBtn.addEventListener("click", function (e) {
+
+    e.preventDefault();
 
     //resets the innerHtml of the score counter
     scoreCounter.innerHTML = 0;
 
+    // limit = fieldSize.value;
+    console.log("Number of cells =", limit);
+
     //if the button has the "active" class (then there is a grid on screen)
-    if (generateBtn.classList.contains("active")) {
+    if (generateFieldForm.classList.contains("active")) {
 
         console.log("resetting the field");
+
+        // limit = fieldSize.value;
+        // console.log("Number of cells =", fieldSize.value);
 
         //removes the grid
         removeMineField(limit);
