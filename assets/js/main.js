@@ -92,6 +92,25 @@ function removeMineField(limit) {
 
     fieldElement.innerHTML = "";
 
+};
+
+/**
+ * ### Adds the gameOver class to each cell on the field
+ * @param {number} limit the number ot times in wich the code will loop to add the "gameOver" class. it has the same value as the number of the cells in the field.
+ */
+function gameOver(limit) {
+    for (let i = 0; i < limit; i++) {
+
+        // Crea un array con tutti i div classe "cell"
+        const cellsArray = document.querySelectorAll(".cell");
+        //aggiunge la classe "gameover" all'elemento all'indfice i dell'array di celle fino a termine del ciclo
+        cellsArray[i].classList.add("gameOver");
+
+    }
+
+    //removes the d-none class from the game over message
+    gameOverElement.classList.remove("d-none");
+
 }
 
 /* Generate Field Button */
