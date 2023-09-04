@@ -101,6 +101,10 @@ function generateMineField(domElement, limit) {
         //updates the cell counter
         const cellValue = i + 1;
 
+        /* ADDS ID TO CELLS TO CHECK MINES LATER
+        cellElement.setAttribute("id", `cell_${cellValue}`); 
+        */
+
         //If the mines array includes the value of the cell being checked on this loop
         if (minesArray.includes(cellValue)) {
 
@@ -135,6 +139,13 @@ function generateMineField(domElement, limit) {
                     //Non è più possibile rimuovere la selezione e la cella mostra il suo valore
                     this.classList.add("bgGreen");
                     console.log("Cella cliccata =", cellValue);
+
+                    /* BASE TO CHEK MINES 
+                    const scanLft = document.getElementById(`cell_${(cellValue - 1)}`);
+                    console.log(scanLft);
+                    if (scanLft.classList.contains("mine")) {
+                        console.log("mina a sx");
+                    }; */
 
                     // cellElement.append(cellValue);
                     cellElement.append("🚩");
