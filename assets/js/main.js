@@ -80,7 +80,7 @@ function generateMineField(domElement, limit) {
 
     console.log("generating cells");
 
-    //Genera l'array delle mine
+    //Generates an array of mines
     const minesArray = generateMines(minesToGenerate, Number(limit));
 
     //resets the score value
@@ -88,23 +88,23 @@ function generateMineField(domElement, limit) {
 
     for (let i = 0; i < limit; i++) {
 
-        //crea una cella
+        //creates the cells
         const cellElement = document.createElement('div');
         cellElement.classList.add('cell');
 
-        //assegna dinamicamente la larghezza della cella in base al numero di caselle
+        //calcs the cell width based on the number of cells on the grid
         cellElement.style.width = `calc(100% / ${Math.sqrt(limit)})`;
 
-        //inserisce nel markup la cella creata
+        //appends the new created cell to the markup
         domElement.append(cellElement);
 
-        //aggiorna il contatore del valore delle celle
+        //updates the cell counter
         const cellValue = i + 1;
 
-        //se l'array delle mine include il valore della cella controllata dal ciclo
+        //If the mines array includes the value of the cell being checked on this loop
         if (minesArray.includes(cellValue)) {
 
-            //aggiunge la classe "mine" alla cella
+            //Adds the "mine" class to the cell
             cellElement.classList.add("mine");
 
             //EVIDENZIATORE MINE TEMPORANEO DI DEBUG
@@ -112,13 +112,13 @@ function generateMineField(domElement, limit) {
 
         }
 
-        //associa alla cella creata un addEventListener che resterà in attesa
+        //adds an event listener to the newly created cell, wich will stay on hold
         cellElement.addEventListener("click", function () {
 
-            //se le celle non contengono la classe "gameOver"
+            //If the cells do not contain the "gameOver" class
             if (!cellElement.classList.contains("gameOver")) {
 
-                //Se la cella contiene la classe "mine" al click il colore viene cambiato in rosso e viene mostrata la bomba
+                //If the cell contains the "mine" class, when clicked it's background will become red and a bomb will be displayed. The gameOver function will be invoked
                 if (cellElement.classList.contains("mine")) {
 
                     cellElement.classList.add("bgRed");
@@ -192,7 +192,8 @@ function gameOver(limit) {
 
         // Crea un array con tutti i div classe "cell"
         const cellsArray = document.querySelectorAll(".cell");
-        //aggiunge la classe "gameover" all'elemento all'indfice i dell'array di celle fino a termine del ciclo
+
+        //aggiunge la classe "gameover" all'elemento all'indice i dell'array di celle fino a termine del ciclo. Gli elementi con la classe "gameOver" non sono cliccabili (vedi funzione generateMineField).
         cellsArray[i].classList.add("gameOver");
 
     }
@@ -214,7 +215,8 @@ function victory(limit) {
 
         // Crea un array con tutti i div classe "cell"
         const cellsArray = document.querySelectorAll(".cell");
-        //aggiunge la classe "gameover" all'elemento all'indfice i dell'array di celle fino a termine del ciclo
+
+        //aggiunge la classe "gameover" all'elemento all'indice i dell'array di celle fino a termine del ciclo. Gli elementi con la classe "gameOver" non sono cliccabili (vedi funzione generateMineField).
         cellsArray[i].classList.add("gameOver");
 
     }
