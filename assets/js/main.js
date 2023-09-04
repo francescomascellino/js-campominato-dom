@@ -38,9 +38,35 @@ function generateMineField(domElement, limit) {
         //l'addEventListener viene associato a ogni cella ogni volta che viene creata durante il ciclo e rimane in attesa.
         cellElement.addEventListener("click", function () {
 
-            //this fa rifermento al "soggetto" dell'eventListener
-            this.classList.toggle("bgGreen");
-            console.log(cellValue);
+            //se le celle non contengono la classe "gameOver"
+            if (!cellElement.classList.contains("gameOver")) {
+
+                //Se la cella contiene la classe "mine" al click il colore viene cambiato in rosso
+                if (cellElement.classList.contains("mine")) {
+
+                    cellElement.classList.add("bgRed");
+                    console.log(cellValue);
+
+                    cellElement.innerHTML = "";
+                    cellElement.append("💣");
+
+                    gameOver(limit)
+
+                    //Altrimenti il colore viene cambiato in verde
+                } else {
+
+                    //this fa rifermento al "soggetto" dell'eventListener
+                    //Non è più possibile rimuovere la selezione e la cella mostra il suo valore
+                    this.classList.add("bgGreen");
+                    console.log(cellValue);
+
+                    cellElement.innerHTML = "";
+                    // cellElement.append(cellValue);
+                    cellElement.append("🚩");
+
+                }
+
+            }
 
         })
 
@@ -90,16 +116,19 @@ function removeMineField(limit) {
 
     console.log("removing cells");
 
-    /*     for (let i = 0; i < limit; i++) {
-    
-            // Select the first element with class "cell"
-            const cells = document.querySelector(".cell");
-            //remove the selected element from the dom
-            cells.remove();
-    
-        } */
+    for (let i = 0; i < limit; i++) {
 
-    fieldElement.innerHTML = "";
+        // Select the first element with class "cell"
+        const cells = document.querySelector(".cell");
+        //remove the selected element from the dom
+        cells.remove();
+
+        //adds the d-none class from the game over message
+        gameOverElement.classList.add("d-none");
+
+    }
+
+    // fieldElement.innerHTML = "";
 
 };
 
