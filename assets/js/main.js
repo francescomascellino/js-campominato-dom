@@ -234,7 +234,7 @@ resetBtn.addEventListener("click", function (e) {
     //resets the innerHtml of the score counter
     scoreCounter.innerHTML = 0;
 
-    // limit = fieldSize.value;
+    limit = fieldSize.value;
     console.log("Number of cells =", limit);
 
     //if the button has the "active" class (then there is a grid on screen)
