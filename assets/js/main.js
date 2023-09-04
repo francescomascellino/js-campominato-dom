@@ -7,6 +7,7 @@ Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed 
 const generateBtn = document.getElementById("generateBtn");
 const resetBtn = document.getElementById("resetBtn");
 const fieldElement = document.querySelector(".field");
+const gameOverElement = document.getElementById("gameOver");
 const limit = 100;
 
 /**
@@ -36,6 +37,41 @@ function generateMineField(domElement, limit) {
 
     }
 };
+
+/**
+ * ## Generates a cartain value of random numbers wich will be assigned to an array
+ * @param {number} minesNumber how many random numbers have to be generated
+ * @param {number} limit the maximum value the generated random number, corresponding to the number of cells on the field.
+ * @returns an array of "minesNumber" values between 1 and "limit"
+ */
+function generateMines(minesNumber, limit) {
+    const minesList = [];
+
+    /* For Loop
+    for (let i = 0; minesList.length < minesNumber; i++) {
+    
+            let mine = Math.floor(Math.random() * limit) + 1;
+    
+            if (!minesList.includes(mine)) {
+                minesList.push(mine);
+            }
+    
+        }
+    */
+
+    while (minesList.length < minesNumber) {
+
+        let mine = Math.floor(Math.random() * limit) + 1;
+
+        if (!minesList.includes(mine)) {
+            minesList.push(mine);
+        }
+
+    }
+
+    console.log("Mines =", minesList);
+    return minesList;
+}
 
 /**
  * ### Remove Mine Field Cells
