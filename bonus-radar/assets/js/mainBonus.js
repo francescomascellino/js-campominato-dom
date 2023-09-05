@@ -142,7 +142,7 @@ function generateMineField(domElement, limit) {
                     this.classList.add("bgGreen");
                     console.log("Cella cliccata =", cellValue);
 
-                    // BASE TO CHEK MINES 
+                    // BASE TO CHEK MINES - ERRORS WHEN CHECKING MINES AT THE GRID BORDER
 
                     //CHECK MINES LEFT
                     const scanLft = document.getElementById(`cell_${(cellValue - 1)}`);
@@ -150,29 +150,40 @@ function generateMineField(domElement, limit) {
                     if (scanLft.classList.contains("mine")) {
                         console.log("mina a sx");
 
-                        radar += 1
+                        radar += 1;
                         console.log("Radar =", radar);
 
                     };
 
                     // CHECK MINES RIGHT
-                    const scanRgt = document.getElementById(`cell_${(cellValue - 10)}`);
+                    const scanRgt = document.getElementById(`cell_${(cellValue + 1)}`);
                     console.log(scanRgt);
                     if (scanRgt.classList.contains("mine")) {
                         console.log("mina a dx");
 
-                        radar += 1
+                        radar += 1;
                         console.log("Radar =", radar);
 
                     };
 
                     // CHECK MINES TOP
-                    const scanTop = document.getElementById(`cell_${(cellValue + 1)}`);
+                    const scanTop = document.getElementById(`cell_${(cellValue - (Math.sqrt(limit)))}`);
                     console.log(scanTop);
                     if (scanTop.classList.contains("mine")) {
                         console.log("mina su");
 
-                        radar += 1
+                        radar += 1;
+                        console.log("Radar =", radar);
+
+                    };
+
+                    // CHECK MINES BOTTOM
+                    const scanBtm = document.getElementById(`cell_${(cellValue + (Math.sqrt(limit)))}`);
+                    console.log(scanBtm);
+                    if (scanBtm.classList.contains("mine")) {
+                        console.log("mina giù");
+
+                        radar += 1;
                         console.log("Radar =", radar);
 
                     };
