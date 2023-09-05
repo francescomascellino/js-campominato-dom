@@ -101,6 +101,12 @@ function generateMineField(domElement, limit) {
         //updates the cell counter
         const cellValue = i + 1;
 
+        // ADDS ID TO CELLS TO CHECK MINES LATER
+        cellElement.setAttribute("id", `cell_${cellValue}`);
+
+        // RADAR VARIABLE THAT CHECKS HOW MANY MINES ARE NEARBY
+        let radar = 0;
+
         //If the mines array includes the value of the cell being checked on this loop
         if (minesArray.includes(cellValue)) {
 
@@ -108,7 +114,7 @@ function generateMineField(domElement, limit) {
             cellElement.classList.add("mine");
 
             //EVIDENZIATORE MINE TEMPORANEO DI DEBUG
-            //cellElement.classList.add("bgRed");
+            cellElement.classList.add("bgRed");
 
         }
 
@@ -136,8 +142,44 @@ function generateMineField(domElement, limit) {
                     this.classList.add("bgGreen");
                     console.log("Cella cliccata =", cellValue);
 
+                    // BASE TO CHEK MINES 
+
+                    //CHECK MINES LEFT
+                    const scanLft = document.getElementById(`cell_${(cellValue - 1)}`);
+                    console.log(scanLft);
+                    if (scanLft.classList.contains("mine")) {
+                        console.log("mina a sx");
+
+                        radar += 1
+                        console.log("Radar =", radar);
+
+                    };
+
+                    // CHECK MINES RIGHT
+                    const scanRgt = document.getElementById(`cell_${(cellValue - 10)}`);
+                    console.log(scanRgt);
+                    if (scanRgt.classList.contains("mine")) {
+                        console.log("mina a dx");
+
+                        radar += 1
+                        console.log("Radar =", radar);
+
+                    };
+
+                    // CHECK MINES TOP
+                    const scanTop = document.getElementById(`cell_${(cellValue + 1)}`);
+                    console.log(scanTop);
+                    if (scanTop.classList.contains("mine")) {
+                        console.log("mina su");
+
+                        radar += 1
+                        console.log("Radar =", radar);
+
+                    };
+
                     // cellElement.append(cellValue);
-                    cellElement.append("🚩");
+                    // cellElement.append("🚩");
+                    cellElement.append(`🚩 ${radar}`);
 
                     //the score counter is updated
                     scoreCounter.innerHTML = scoreValue += 1;

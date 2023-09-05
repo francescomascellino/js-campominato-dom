@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Campo Minato Grid</title>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+            crossorigin="anonymous">
+
+        <link rel="stylesheet" href="./assets/css/style.css">
+
+    </head>
+    <body>
+
+        <div class="container mt-4">
+
+            <div class="card">
+
+                <div class="card-header text-center fw-bold h3">
+                    Mine Field
+                </div>
+
+                <div class="card-body">
+
+                    <form id="generateFieldForm">
+
+                        <div class="d-flex justify-content-center">
+
+                            <label for="fieldSize" class="fw-bold me-2">Choose
+                                the
+                                field
+                                size:</label>
+                            <select class="border border-1 rounded-3"
+                                id="fieldSize">
+                                <option value="100">Easy (10x10)</option>
+                                <option value="81">Medium (9x9)</option>
+                                <option value="49">Hard (7x7)</option>
+                            </select>
+
+                        </div>
+
+                        <div class="d-flex justify-content-center my-3">
+
+                            <button type="submit" id="generateBtn"
+                                class="btn btn-success">Generate
+                                The Field</button>
+
+                            <button type="reset" id="resetBtn"
+                                class="btn btn-danger">Reset
+                                Field</button>
+
+                        </div>
+
+                    </form>
+
+                    <h1
+                        class="border border-1 border-dark-subtle rounded-3 p-2 text-center text-success bg-body-secondary mt-4">Pts:
+                        <span id="scoreCounter">0</span></h1>
+
+                </div>
+
+            </div>
+
+            <div class="field mt-5 m-auto position-relative">
+                <div id="gameOver"
+                    class="d-none position-absolute start-50 top-50  translate-middle">
+                    <h1 id="gameOverMessage"
+                        class="text-center border border-2 p-2 rounded-3 bg-gradient shadow"></h1>
+                </div>
+
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="./assets/js/main.js"></script>
+    </body>
+</html>

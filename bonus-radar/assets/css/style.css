@@ -1,0 +1,31 @@
+body {
+    background-color: #455d7a;
+}
+
+button {
+    width: 10rem;
+    margin: 0 1rem;
+}
+
+.field {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+.cell {
+    border: 1px solid #dbd8e3;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.bgGreen {
+    background-color: #53a8b6;
+}
+
+.bgRed {
+    background-color: #f95959;
+}
